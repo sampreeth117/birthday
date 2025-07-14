@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Play, Pause, Heart, Camera, MessageCircle, Clock, Waves, Flower, Mountain, TreePine } from 'lucide-react';
+import { Play, Pause, Heart, Waves, Flower, Mountain, TreePine } from 'lucide-react';
 
 interface TimeLeft {
   days: number;
@@ -12,7 +12,6 @@ function App() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [isCountdownComplete, setIsCountdownComplete] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
 
@@ -23,7 +22,7 @@ function App() {
   const memories = [
     {
       title: "Graduation Day",
-      description: "The day we had our first photoshoot",
+      description: "The day we had our first photo",
       image: "/photos/main/mem-1.jpg"
     },
     {
@@ -53,7 +52,7 @@ function App() {
     },
     {
       title: "First Movie Night",
-      description: "Thrilling movie with a pinch of goosebumps",
+      description: "Thrilling movie with a pinch of goosebump",
       image: "/photos/main/mem-8.jpg"
     },
     {
@@ -68,7 +67,7 @@ function App() {
     },
     {
       title: "First time apart after our bond",
-      description: "Had an overflow of feelings during my confession",
+      description: "Had an overflow of feelings after my confession",
       image: "/photos/main/mem-11.jpg"
     },
     {
@@ -83,7 +82,7 @@ function App() {
     },
     {
       title: "First proper evening",
-      description: "Still remember how much of a hurry you were in that day",
+      description: "Still remember how much of a hurry you were on that day",
       image: "/photos/main/mem-3.jpg"
     },
     {
@@ -108,12 +107,12 @@ function App() {
     },
     {
       title: "Fishy Fish",
-      description: "Never saw a more curious you ever before",
+      description: "Never saw a more curious \"you\" ever before",
       image: "/photos/main/mem-19.jpg"
     },
     {
       title: "Small Oath",
-      description: "Oath to never eat fish in front of you again",
+      description: "Oath to never eat fish when I'm with you",
       image: "/photos/main/mem-20.jpg"
     }
   ];
@@ -229,7 +228,7 @@ function App() {
             {/* Countdown Timer */}
             <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 shadow-2xl animate-fade-in delay-700">
               <div className="text-center mb-6">
-                <h2 className="text-3xl font-semibold text-white">Wishes in</h2>
+                <h2 className="text-3xl font-semibold text-white">Time's up, Scroll Down</h2>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
