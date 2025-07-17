@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Play, Pause, Heart, Waves, Flower, Mountain, TreePine } from 'lucide-react';
 
 interface TimeLeft {
@@ -22,12 +22,12 @@ function App() {
   const memories = [
     {
       title: "Graduation Day",
-      description: "The day we had our first photo",
+      description: "The day we took our first photo — the beginning of countless memories 💖✨",
       image: "/photos/main/mem-1.jpg"
     },
     {
       title: "Evening Snaps",
-      description: "One of the first memories where we took lots of snap selfies together",
+      description: "One of the first memories where we took lots of snap selfies together 💞✨",
       image: "/photos/main/mem-4.jpg"
     },
     {
@@ -37,83 +37,88 @@ function App() {
     },
     {
       title: "Midi Snap",
-      description: "The first time I saw you as a woman",
+      description: "The first time I saw you as a woman — and it changed everything. 💫❤️",
       image: "/photos/main/mem-6.jpg"
     },
     {
       title: "Early morning bliss",
-      description: "Was shocked to see you in sweater",
+      description: "Was shocked to see you in my sweater… but you made cozy look cool 😄❤️",
       image: "/photos/main/mem-7.jpg"
     },
     {
       title: "First temple visit",
-      description: "The amount of peace that we both shared was phenomenal",
+      description: "The peace we shared was nothing short of phenomenal — like the world paused just for us 🤍✨",
       image: "/photos/main/mem-2.jpg"
     },
     {
       title: "First Movie Night",
-      description: "Thrilling movie with a pinch of goosebump",
+      description: "A thrilling movie with a pinch of goosebumps and a whole lot of hand-squeezing 🎬",
       image: "/photos/main/mem-8.jpg"
     },
     {
       title: "First time felt at home",
-      description: "You went an extra mile for me on that day",
+      description: "You went the extra mile for me that day — and I felt every step of your love ✨",
       image: "/photos/main/mem-9.jpg"
     },
     {
       title: "First Birthday Party",
-      description: "Burgers and softies, what else was missing?",
+      description: "Burgers and softies — what else was missing? Just a little more time with you ❤️",
       image: "/photos/main/mem-10.jpg"
     },
     {
       title: "First time apart after our bond",
-      description: "Had an overflow of feelings after my confession",
+      description: "Had an overflow of feelings after my confession — heart full, words few ❤️‍🔥",
       image: "/photos/main/mem-11.jpg"
     },
     {
       title: "Short ride to eat softie",
-      description: "First impromptu plan and a great dessert",
+      description: "First impromptu plan, and it ended with a softie as sweet as the memory 💖",
       image: "/photos/main/mem-12.jpg"
     },
     {
       title: "Lawn Memories",
-      description: "Sharing the same earphones with same music taste",
+      description: "Sharing the same earphones, same music taste, and a little piece of heart too 🎧💞🎶",
       image: "/photos/main/mem-13.jpg"
     },
     {
       title: "First proper evening",
-      description: "Still remember how much of a hurry you were on that day",
+      description: "Still remember how you were in such a rush… but somehow we made time for Ice-cream 🍰❤️",
       image: "/photos/main/mem-3.jpg"
     },
     {
       title: "First home-made burger",
-      description: "At least the patty wasn't burnt",
+      description: "At least the patty wasn't burnt… that's a win, right? 😅",
       image: "/photos/main/mem-14.jpg"
     },
     {
       title: "Beach hungama",
-      description: "A quick selfie with Rowdy baby",
+      description: "Sun, sea, and my Rowdy Baby by my side ☀️🌊❤️",
       image: "/photos/main/mem-16.jpg"
     },
     {
       title: "Warm morning ride",
-      description: "Cold air and warm palms, a ride to remember",
+      description: "Cold air, warm palms… do you remember the doves flying away? ❄️❤️ A moment etched in heart.",
       image: "/photos/main/mem-17.jpg"
     },
     {
       title: "First Dinner at Fine Dine",
-      description: "I am still sorry for being such a crybaby",
+      description: "Still sorry for being such a crybaby 😢💔 but thank you for holding me through it 🤍",
       image: "/photos/main/mem-18.jpg"
     },
     {
       title: "Fishy Fish",
-      description: "Never saw a more curious \"you\" ever before",
+      description: "Never saw a more curious you than this 🤔💫",
       image: "/photos/main/mem-19.jpg"
     },
     {
       title: "Small Oath",
-      description: "Oath to never eat fish when I'm with you",
+      description: "Oath to never eat fish when I'm with you 🐟❤️",
       image: "/photos/main/mem-20.jpg"
+    },
+    {
+      title: "Full filmy vibes",
+      description: "Drenched in rain, soaked in love — fort memories forever 💙☔",
+      image: "/photos/main/mem-21.jpg"
     }
   ];
 
