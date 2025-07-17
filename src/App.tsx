@@ -15,7 +15,7 @@ function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
 
-  const targetDate = new Date('2025-09-12T00:00:00+05:30').getTime();
+  const targetDate = new Date('2025-07-12T00:00:00+05:30').getTime();
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
 
@@ -256,27 +256,25 @@ function App() {
             </div>
           </section>
 
-          {/* YouTube Video */}
-          <div className="w-full max-w-6xl mb-12 mx-auto px-4 transform scale-105 sm:scale-110 transition-transform duration-700">
+          {/* Short Video */}
+          <section className="w-full max-w-4xl mb-12 mx-auto px-4">
             <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
               <h3 className="text-2xl font-semibold text-white mb-4 text-center">
                 Here's a small video from me 😁
               </h3>
-              <div className="aspect-video rounded-xl overflow-hidden">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/CgCVZdcKcqY?autoplay=1&mute=0"
-                  title="Birthday Video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="rounded-xl"
-                />
+              <div className="overflow-hidden rounded-2xl shadow-lg border border-white/10">
+                <video
+                  controls
+                  autoPlay
+                  loop
+                  className="w-full h-auto object-cover rounded-2xl"
+                >
+                  <source src="/videos/video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
-          </div>
-
+          </section>
 
           {/* Memory Lane Section */}
           <section className="py-20 px-6">
