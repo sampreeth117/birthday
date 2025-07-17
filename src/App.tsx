@@ -17,7 +17,7 @@ function App() {
 
   const targetDate = new Date('2025-09-12T00:00:00+05:30').getTime();
 
-  const photos = Array.from({ length: 46 }, (_, i) => `/photos/${i + 1}.jpg`);
+  const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
 
   const memories = [
     {
