@@ -130,15 +130,21 @@ function App() {
       if (distance < 0) {
         setIsCountdownComplete(true);
         clearInterval(timer);
-        // Stop countdown music and start celebration music
+
+        // Stop calm music
         if (audioRef.current) {
           audioRef.current.pause();
         }
+
+        // Play celebration music & reflect that it's playing
         if (celebrationAudioRef.current) {
           celebrationAudioRef.current.play();
+          setIsPlaying(true); // Important!
         }
+
         return;
       }
+
 
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -163,24 +169,26 @@ function App() {
     }
   }, []);
 
-  const toggleAudio = () => {
-    if (audioRef.current) {
+  const toggleAudio = async () => {
+    const audio = isCountdownComplete ? celebrationAudioRef.current : audioRef.current;
+
+    if (!audio) return;
+
+    try {
       if (isPlaying) {
-        audioRef.current.pause();
+        audio.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        await audio.play();
+        setIsPlaying(true);
       }
-      setIsPlaying(!isPlaying);
-    }
-    if (celebrationAudioRef.current) {
-      if (isPlaying) {
-        celebrationAudioRef.current.pause();
-      } else {
-        celebrationAudioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    } catch (err) {
+      console.error("Audio play/pause failed:", err);
     }
   };
+
+
+
 
   if (isCountdownComplete) {
     return (
@@ -351,12 +359,13 @@ function App() {
         </div>
 
         {/* Audio elements */}
-        <audio ref={audioRef} loop>
+        <audio ref={audioRef} loop preload="auto">
           <source src="/music/nature-sounds.mp3" type="audio/mpeg" />
         </audio>
-        <audio ref={celebrationAudioRef} loop>
+        <audio ref={celebrationAudioRef} loop preload="auto">
           <source src="/music/celebration-music.mp3" type="audio/mpeg" />
         </audio>
+
 
         <style jsx>{`
         @keyframes fade-in {
@@ -460,12 +469,13 @@ function App() {
       </div>
 
       {/* Audio elements */}
-      <audio ref={audioRef} loop>
+      <audio ref={audioRef} loop preload="auto">
         <source src="/music/nature-sounds.mp3" type="audio/mpeg" />
       </audio>
-      <audio ref={celebrationAudioRef} loop>
+      <audio ref={celebrationAudioRef} loop preload="auto">
         <source src="/music/celebration-music.mp3" type="audio/mpeg" />
       </audio>
+
 
       <style jsx>{`
         @keyframes fade-in {
