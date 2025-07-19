@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import MemoryQuiz from "./components/MemoryQuiz";
+import confetti from "canvas-confetti";
+
 import {
   Play,
   Pause,
@@ -29,7 +31,7 @@ function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
 
-  const targetDate = new Date("2025-07-12T00:00:00+05:30").getTime();
+  const targetDate = new Date("2025-07-19T13:58:20+05:30").getTime();
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
 
@@ -172,6 +174,20 @@ function App() {
           setIsPlaying(true); // Important!
         }
 
+        confetti({
+          particleCount: 1500,
+          spread: 270,
+          startVelocity: 50,
+          decay: 0.9,
+          gravity: 0.8,
+          scalar: 1.5,
+          ticks: 300,
+          origin: { x: 0.5, y: 0.6 },
+          colors: ["#ff69b4", "#ffffff", "#fef08a", "#bae6fd"],
+          shapes: ["circle", "square"],
+          angle: 90,
+        });
+
         return;
       }
 
@@ -267,9 +283,43 @@ function App() {
                 😇✨
               </p>
               <div className="flex justify-center space-x-4 text-pink-300 animate-fade-in delay-500">
-                <Heart className="animate-pulse" size={30} />
-                <Heart className="animate-pulse delay-300" size={30} />
-                <Heart className="animate-pulse delay-700" size={30} />
+                {[0, 300, 700].map((delay, i) => (
+                  <button
+                    key={i}
+                    onClick={(e) => {
+                      const rect = (
+                        e.target as HTMLElement
+                      ).getBoundingClientRect();
+                      const x =
+                        (rect.left + rect.width / 2) / window.innerWidth;
+                      const y =
+                        (rect.top + rect.height / 2) / window.innerHeight;
+
+                      import("canvas-confetti").then(
+                        ({ default: confetti }) => {
+                          confetti({
+                            particleCount: 60,
+                            spread: 80,
+                            origin: { x, y },
+                            colors: ["#ff69b4", "#ffffff", "#fef08a"],
+                          });
+                        }
+                      );
+                    }}
+                    className={`transition-transform hover:scale-110 active:scale-90`}
+                  >
+                    <Heart
+                      className={`animate-pulse ${
+                        delay === 300
+                          ? "delay-300"
+                          : delay === 700
+                          ? "delay-700"
+                          : ""
+                      }`}
+                      size={30}
+                    />
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -418,10 +468,44 @@ function App() {
                   new year of your life be filled with endless joy, amazing
                   adventures, and all the happiness your heart can hold."
                 </p>
-                <div className="flex justify-center space-x-6 text-pink-300">
-                  <Heart className="animate-pulse" size={40} />
-                  <Heart className="animate-pulse delay-300" size={40} />
-                  <Heart className="animate-pulse delay-700" size={40} />
+                <div className="flex justify-center space-x-4 text-pink-300 animate-fade-in delay-500">
+                  {[0, 300, 700].map((delay, i) => (
+                    <button
+                      key={i}
+                      onClick={(e) => {
+                        const rect = (
+                          e.target as HTMLElement
+                        ).getBoundingClientRect();
+                        const x =
+                          (rect.left + rect.width / 2) / window.innerWidth;
+                        const y =
+                          (rect.top + rect.height / 2) / window.innerHeight;
+
+                        import("canvas-confetti").then(
+                          ({ default: confetti }) => {
+                            confetti({
+                              particleCount: 60,
+                              spread: 80,
+                              origin: { x, y },
+                              colors: ["#ff69b4", "#ffffff", "#fef08a"],
+                            });
+                          }
+                        );
+                      }}
+                      className={`transition-transform hover:scale-110 active:scale-90`}
+                    >
+                      <Heart
+                        className={`animate-pulse ${
+                          delay === 300
+                            ? "delay-300"
+                            : delay === 700
+                            ? "delay-700"
+                            : ""
+                        }`}
+                        size={30}
+                      />
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>

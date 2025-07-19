@@ -44,7 +44,7 @@ const quizData: Question[] = [
   },
   {
     question: "What do I still have with me which you have given me?",
-    options: ["Chocolate wrapper", "Keychain", "Chocolate", "Pen"],
+    options: ["Imli wrapper", "Keychain", "Chocolate", "Pen"],
     answer: 0,
   },
   {
