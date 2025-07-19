@@ -9,8 +9,8 @@ interface Question {
 const quizData: Question[] = [
   {
     question: "Where did we take our first photo together?",
-    options: ["College Canteen", "Graduation Day", "Cafe in E-city", "Temple"],
-    answer: 1,
+    options: ["Canteen","Hotel" , "Park" , "College Trip" ],
+    answer: 3,
   },
   {
     question: "What did we eat on our first birthday celebration?",
@@ -18,29 +18,44 @@ const quizData: Question[] = [
     answer: 1,
   },
   {
-    question: "Which memory involved sharing earphones?",
-    options: ["Cafe Tour", "Lawn Memories", "First Temple Visit", "First Movie Night"],
+    question: "What was one of the first food we had together after we met at office?",
+    options: ["Dosa", "Poori", "Golgappa", "Pizza"],
+    answer: 3,
+  },
+  {
+    question: "What was the first cafe we visited together?",
+    options: ["Bangalore Central Cafe", "Starbucks", "Frozen Bottle", "Cafe Coffee Day"],
+    answer: 2,
+  },
+  {
+    question: "What did I lose when I first visited E-city Office?",
+    options: ["Bike Key", "Wallet", "Charger", "Phone"],
+    answer: 0,
+  },
+  {
+    question: "Whom did I like and you disliked in bigg boss?",
+    options: ["Gouthami Jadav", "Mokshitha Pai", "Bhavya Gowda", "Chaithra Kundapura"],
+    answer: 2,
+  },
+  {
+    question: "What was the chocolate you bought me from E-city Office?",
+    options: ["Dairy Milk", "Milk Chocolate", "Cadbury Silk", "Dark Chocolate"],
     answer: 1,
   },
   {
-    question: "Which memory involved sharing earphones?",
-    options: ["Cafe Tour", "Lawn Memories", "First Temple Visit", "First Movie Night"],
+    question: "What do I still have with me which you have given me?",
+    options: ["Chocolate wrapper", "Keychain", "Chocolate", "Pen"],
+    answer: 0,
+  },
+  {
+    question: "What was my first birthday gift to you?",
+    options: ["Chocolates", "Earphone", "Book", "Watch"],
     answer: 1,
   },
   {
-    question: "Which memory involved sharing earphones?",
-    options: ["Cafe Tour", "Lawn Memories", "First Temple Visit", "First Movie Night"],
-    answer: 1,
-  },
-  {
-    question: "Which memory involved sharing earphones?",
-    options: ["Cafe Tour", "Lawn Memories", "First Temple Visit", "First Movie Night"],
-    answer: 1,
-  },
-  {
-    question: "Which memory involved sharing earphones?",
-    options: ["Cafe Tour", "Lawn Memories", "First Temple Visit", "First Movie Night"],
-    answer: 1,
+    question: "For the last question, when did I first confess my feelings?",
+    options: ["2025-04-01", "2025-02-14", "2025-03-19", "2025-03-01"],
+    answer: 2,
   }
 ];
 
@@ -110,16 +125,22 @@ export default function MemoryQuiz() {
           </>
         ) : (
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-white mb-4">You did it! 🎉</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">You did it 🎉</h2>
             <p className="text-xl text-white mb-6">
-              Your Score: {score} / {quizData.length}
+              You guessed: {score} / {quizData.length}
             </p>
-            <p className="text-white/70">
+            <p className="text-white font-bold mb-4">
               {score === quizData.length
                 ? "Flawless memory Muddu! 💖"
                 : score >= 2
                 ? "Pretty impressive Ammi!"
                 : "Every memory is still special — no worries ❤️"}
+            </p>
+            <br/>
+            <p>
+              <span className="text-white">This quiz was made with love. I hope it brings back some beautiful memories! 💕</span>
+              <br/>
+              <span className="text-blue-200">PS - You can retake the quiz anytime by refreshing the web page.</span>
             </p>
           </div>
         )}
