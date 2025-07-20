@@ -31,7 +31,7 @@ function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
 
-  const targetDate = new Date("2025-09-12T00:00:00+05:30").getTime();
+  const targetDate = new Date("2025-07-12T00:00:00+05:30").getTime();
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
 
