@@ -44,7 +44,7 @@ function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
 
-  const targetDate = new Date("2025-08-12T12:00:00+05:30").getTime();
+  const targetDate = new Date("2025-09-12T12:00:00+05:30").getTime();
 
   // const targetDate = new Date("2025-09-12T12:00:00+05:30").getTime();
   const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
@@ -341,7 +341,7 @@ function App() {
             {isPlaying ? <Pause size={18} /> : <Play size={18} />}
           </button>
           <span className="text-xs text-white/30 mt-1">
-            Click here to {isPlaying ? "mute" : "play"} the music
+            {isPlaying ? "Mute" : "Play"} the music
           </span>
         </div>
 
