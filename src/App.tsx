@@ -3,8 +3,6 @@ import MemoryQuiz from "./components/MemoryQuiz";
 import confetti from "canvas-confetti";
 
 import {
-  Play,
-  Pause,
   Heart,
   Waves,
   Flower,
@@ -54,12 +52,10 @@ function App() {
     hours: 0,
   });
   const [isCountdownComplete, setIsCountdownComplete] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [particles, setParticles] = useState<ParticleType[]>([]);
   const [selectedMemory, setSelectedMemory] = useState<number | null>(null);
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
-  const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
   const particleIdRef = useRef(0);
 
@@ -187,7 +183,6 @@ function App() {
     },
   ];
 
-  // Particle system for floating hearts, stars, sparkles
   useEffect(() => {
     const createParticle = (): ParticleType => {
       const types: ("heart" | "star" | "sparkle")[] = [
@@ -230,7 +225,6 @@ function App() {
     return () => clearInterval(interval);
   }, [isCountdownComplete]);
 
-  // Slideshow navigation for Journey memories
   const nextMemory = () => {
     if (selectedMemory === null) return;
     setSelectedMemory((selectedMemory + 1) % memories.length);
@@ -243,7 +237,6 @@ function App() {
     );
   };
 
-  // Slideshow navigation for Captured Smiles photos
   const nextPhoto = () => {
     if (selectedPhoto === null) return;
     setSelectedPhoto((selectedPhoto + 1) % photos.length);
@@ -256,7 +249,6 @@ function App() {
     );
   };
 
-  // Keyboard navigation support for slideshows
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (selectedMemory !== null) {
@@ -281,17 +273,9 @@ function App() {
       if (distance < 0) {
         setIsCountdownComplete(true);
         clearInterval(timer);
-        if (audioRef.current) {
-          audioRef.current.pause();
-          setIsPlaying(false);
-        }
         if (celebrationAudioRef.current) {
           celebrationAudioRef.current.loop = false;
-          celebrationAudioRef.current
-            .play()
-            .then(() => setIsPlaying(true))
-            .catch(() => setIsPlaying(false));
-          celebrationAudioRef.current.onended = () => setIsPlaying(false);
+          celebrationAudioRef.current.play().catch(() => {});
         }
         confetti({
           particleCount: 1500,
@@ -351,33 +335,6 @@ function App() {
     return () => clearInterval(timer);
   }, [isCountdownComplete, startDate]);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
-    }
-  }, []);
-
-  const toggleAudio = async () => {
-    const audio = isCountdownComplete
-      ? celebrationAudioRef.current
-      : audioRef.current;
-    if (!audio) return;
-    try {
-      if (isPlaying) {
-        audio.pause();
-        setIsPlaying(false);
-      } else {
-        await audio.play();
-        setIsPlaying(true);
-      }
-    } catch {
-      setIsPlaying(false);
-    }
-  };
-
   const renderParticle = (particle: ParticleType) => {
     const style = {
       position: "fixed" as const,
@@ -414,7 +371,6 @@ function App() {
   if (isCountdownComplete) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-teal-700 relative overflow-hidden">
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-10 left-10 text-blue-200 opacity-20 animate-float">
             <Waves size={60} />
@@ -430,10 +386,8 @@ function App() {
           </div>
         </div>
 
-        {/* Floating particles */}
         {particles.map(renderParticle)}
 
-        {/* Memory slideshow modal */}
         {selectedMemory !== null && (
           <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
             <button
@@ -477,7 +431,6 @@ function App() {
           </div>
         )}
 
-        {/* Photos slideshow modal */}
         {selectedPhoto !== null && (
           <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
             <button
@@ -515,21 +468,7 @@ function App() {
           </div>
         )}
 
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center space-y-1">
-          <button
-            onClick={toggleAudio}
-            className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
-          >
-            {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-          </button>
-          <span className="text-xs text-white/30 mt-1">
-            {isPlaying ? "Mute" : "Play"} the music
-          </span>
-        </div>
-
-        {/* Main content */}
         <div className="relative z-10 min-h-screen">
-          {/* Hero Section */}
           <section className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
             <div className="mb-12">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl animate-fade-in">
@@ -579,7 +518,6 @@ function App() {
               </div>
             </div>
 
-            {/* Time Passed Clock */}
             <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 shadow-2xl animate-fade-in delay-700">
               <div className="text-center mb-6">
                 <h2 className="text-3xl font-semibold text-white">
@@ -623,7 +561,6 @@ function App() {
             </div>
           </section>
 
-          {/* Short Video */}
           <section className="w-full max-w-4xl mb-12 mx-auto px-4">
             <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
               <h3 className="text-2xl font-semibold text-white mb-4 text-center">
@@ -643,7 +580,6 @@ function App() {
             </div>
           </section>
 
-          {/* Memory Lane Section */}
           <section className="py-20 px-6">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
@@ -683,7 +619,6 @@ function App() {
             </div>
           </section>
 
-          {/* Photo Gallery Section */}
           <section className="py-20 px-6">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
@@ -715,7 +650,6 @@ function App() {
 
           <MemoryQuiz />
 
-          {/* Special Message Section */}
           <section className="py-20 px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
@@ -799,13 +733,59 @@ function App() {
             </div>
           </section>
         </div>
+
+        <audio ref={celebrationAudioRef} preload="auto">
+          <source src="/music/celebration-music.mp3" type="audio/mpeg" />
+        </audio>
+
+        <style jsx>{`
+          @keyframes fade-in {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          @keyframes float {
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-20px);
+            }
+          }
+          .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+          }
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          .delay-300 {
+            animation-delay: 0.3s;
+          }
+          .delay-500 {
+            animation-delay: 0.5s;
+          }
+          .delay-700 {
+            animation-delay: 0.7s;
+          }
+          .delay-1000 {
+            animation-delay: 1s;
+          }
+          .delay-2000 {
+            animation-delay: 2s;
+          }
+        `}</style>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-teal-700 relative overflow-hidden">
-      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-10 text-blue-200 opacity-20 animate-float">
           <Waves size={60} />
@@ -821,22 +801,11 @@ function App() {
         </div>
       </div>
 
-      {/* Floating particles */}
       {particles.map(renderParticle)}
 
-      {/* Audio controls */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button
-          onClick={toggleAudio}
-          className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
-        >
-          {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-        </button>
-      </div>
+      {/* Removed audio controls */}
 
-      {/* Main content */}
       <div className="relative z-10 min-h-screen">
-        {/* Hero Section */}
         <section className="min-h-screen flex flex-col items-center justify-center p-6 text-center">
           <div className="mb-12">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl animate-fade-in">
@@ -895,11 +864,7 @@ function App() {
         </section>
       </div>
 
-      {/* Audio elements */}
-      <audio ref={audioRef} loop preload="auto">
-        <source src="/music/nature-sounds.mp3" type="audio/mpeg" />
-      </audio>
-      <audio ref={celebrationAudioRef} loop preload="auto">
+      <audio ref={celebrationAudioRef} preload="auto">
         <source src="/music/celebration-music.mp3" type="audio/mpeg" />
       </audio>
 
@@ -928,38 +893,6 @@ function App() {
         }
         .animate-float {
           animation: float 6s ease-in-out infinite;
-        }
-        .animate-celebration-pop {
-          animation: celebration-pop 0.8s ease-out;
-        }
-        @keyframes celebration-pop {
-          0% {
-            transform: scale(0.95);
-            opacity: 0.8;
-          }
-          50% {
-            transform: scale(1.05);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-        .delay-300 {
-          animation-delay: 0.3s;
-        }
-        .delay-500 {
-          animation-delay: 0.5s;
-        }
-        .delay-700 {
-          animation-delay: 0.7s;
-        }
-        .delay-1000 {
-          animation-delay: 1s;
-        }
-        .delay-2000 {
-          animation-delay: 2s;
         }
       `}</style>
     </div>
