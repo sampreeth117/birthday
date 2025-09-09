@@ -236,16 +236,24 @@ function App() {
       // Calculate months passed (approximate)
       const currentDate = new Date(now);
       const startDateObj = new Date(startDate);
-      let monthsPassed = (currentDate.getFullYear() - startDateObj.getFullYear()) * 12 + 
-                        (currentDate.getMonth() - startDateObj.getMonth());
-      
+      let monthsPassed =
+        (currentDate.getFullYear() - startDateObj.getFullYear()) * 12 +
+        (currentDate.getMonth() - startDateObj.getMonth());
+
       // Calculate remaining time after removing months
       const monthsInMs = monthsPassed * 30.44 * 24 * 60 * 60 * 1000; // Average month
       const remainingAfterMonths = timeDifference - monthsInMs;
-      
-      const remainingWeeks = Math.floor(remainingAfterMonths / (1000 * 60 * 60 * 24 * 7));
-      const remainingDays = Math.floor((remainingAfterMonths % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
-      const remainingHours = Math.floor((remainingAfterMonths % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      const remainingWeeks = Math.floor(
+        remainingAfterMonths / (1000 * 60 * 60 * 24 * 7)
+      );
+      const remainingDays = Math.floor(
+        (remainingAfterMonths % (1000 * 60 * 60 * 24 * 7)) /
+          (1000 * 60 * 60 * 24)
+      );
+      const remainingHours = Math.floor(
+        (remainingAfterMonths % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
 
       setTimePassed({
         months: monthsPassed,
@@ -511,17 +519,46 @@ function App() {
           {/* Special Message Section */}
           <section className="py-20 px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-                From the Heart
-              </h2>
+              <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
+                And once again...
+              </h3>
               <div className="bg-white/20 backdrop-blur-md rounded-3xl p-12 shadow-2xl">
                 <p className="text-2xl md:text-3xl text-white leading-relaxed mb-8">
-                  "Dear Muddu, on this special day, I want you to know how
-                  grateful I am to have you in my life. Your kindness, laughter,
-                  and beautiful spirit light up every room you enter. May this
-                  new year of your life be filled with endless joy, amazing
-                  adventures, and all the happiness your heart can hold."
+                  My dearest Muddu,
+                  <br />
+                  <br />
+                  On this special day, I just want to tell you how much you mean
+                  to me. Having you in my life feels like the biggest blessing,
+                  and I can't thank life enough for giving me someone as
+                  precious as you.
+                  <br />
+                  <br />
+                  Your smile, your laughter, your pure heart—they make
+                  everything around me brighter. You just didn't walk into my
+                  life but came into my life exactly when I needed you.
+                  <br />
+                  <br />
+                  As you step into this new year of your life, I pray you find
+                  happiness in every little thing. I want you to have all the
+                  joy, peace, and love your heart can hold. I wish for your
+                  dreams to come true(I know you have some in mind), and I
+                  promise I'll always be here to cheer for you, care for you,
+                  support you, and love you endlessly.
+                  <br />
+                  <br />
+                  You are my safe place, my happiness, and my favorite person.
+                  No words can ever be enough to explain how much you mean to
+                  me, but I hope you always feel it through the way I care for
+                  you.
+                  <br />
+                  <br />
+                  Here's to more laughter, more late-night talks, more memories,
+                  more trips, and more love between us.
+                  <br />
+                  <br />
+                  Happiest Birthday, my Muddu❤️ You are my everything.
                 </p>
+
                 <div className="flex justify-center space-x-4 text-pink-300 animate-fade-in delay-500">
                   {[0, 300, 700].map((delay, i) => (
                     <button
