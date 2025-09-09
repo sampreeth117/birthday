@@ -515,7 +515,7 @@ function App() {
           </div>
         )}
 
-        <div className="fixed top-6 right-6 z-50 flex flex-col items-center space-y-1">
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center space-y-1">
           <button
             onClick={toggleAudio}
             className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
@@ -825,7 +825,7 @@ function App() {
       {particles.map(renderParticle)}
 
       {/* Audio controls */}
-      <div className="fixed top-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={toggleAudio}
           className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
