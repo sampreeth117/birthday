@@ -179,15 +179,28 @@ function App() {
         setIsCountdownComplete(true);
         clearInterval(timer);
 
-        // Stop calm music
+        // Stop calm music and reset playing state
         if (audioRef.current) {
           audioRef.current.pause();
+          setIsPlaying(false);
         }
 
-        // Play celebration music & reflect that it's playing
+        // Play celebration music ONCE (not looped)
         if (celebrationAudioRef.current) {
-          celebrationAudioRef.current.play();
-          setIsPlaying(true); // Important!
+          const celebrationAudio = celebrationAudioRef.current;
+          celebrationAudio.loop = false; // Disable loop
+          celebrationAudio
+            .play()
+            .then(() => {
+              setIsPlaying(true);
+              // Auto-stop music after it finishes
+              celebrationAudio.onended = () => {
+                setIsPlaying(false);
+              };
+            })
+            .catch(() => {
+              setIsPlaying(false);
+            });
         }
 
         confetti({
