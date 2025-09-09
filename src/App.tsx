@@ -19,6 +19,13 @@ interface TimeLeft {
   seconds: number;
 }
 
+interface TimePassed {
+  months: number;
+  weeks: number;
+  days: number;
+  hours: number;
+}
+
 function App() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
@@ -26,12 +33,21 @@ function App() {
     minutes: 0,
     seconds: 0,
   });
+  const [timePassed, setTimePassed] = useState<TimePassed>({
+    months: 0,
+    weeks: 0,
+    days: 0,
+    hours: 0,
+  });
   const [isCountdownComplete, setIsCountdownComplete] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
 
-  const targetDate = new Date("2025-09-12T00:00:00+05:30").getTime();
+  const targetDate = new Date("2025-08-12T12:00:00+05:30").getTime();
+
+  // const targetDate = new Date("2025-09-12T12:00:00+05:30").getTime();
+  const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
 
@@ -204,6 +220,44 @@ function App() {
     return () => clearInterval(timer);
   }, [targetDate]);
 
+  // New useEffect for calculating time passed since Jan 1st, 2025 (only when countdown is complete)
+  useEffect(() => {
+    if (!isCountdownComplete) return;
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const timeDifference = now - startDate;
+
+      if (timeDifference < 0) {
+        setTimePassed({ months: 0, weeks: 0, days: 0, hours: 0 });
+        return;
+      }
+
+      // Calculate months passed (approximate)
+      const currentDate = new Date(now);
+      const startDateObj = new Date(startDate);
+      let monthsPassed = (currentDate.getFullYear() - startDateObj.getFullYear()) * 12 + 
+                        (currentDate.getMonth() - startDateObj.getMonth());
+      
+      // Calculate remaining time after removing months
+      const monthsInMs = monthsPassed * 30.44 * 24 * 60 * 60 * 1000; // Average month
+      const remainingAfterMonths = timeDifference - monthsInMs;
+      
+      const remainingWeeks = Math.floor(remainingAfterMonths / (1000 * 60 * 60 * 24 * 7));
+      const remainingDays = Math.floor((remainingAfterMonths % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+      const remainingHours = Math.floor((remainingAfterMonths % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      setTimePassed({
+        months: monthsPassed,
+        weeks: remainingWeeks,
+        days: remainingDays,
+        hours: remainingHours,
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isCountdownComplete, startDate]);
+
   useEffect(() => {
     // Auto-play background music when component mounts
     if (audioRef.current) {
@@ -323,17 +377,33 @@ function App() {
               </div>
             </div>
 
-            {/* Countdown Timer */}
+            {/* Time Passed Clock (replaces countdown when complete) */}
             <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 shadow-2xl animate-fade-in delay-700">
               <div className="text-center mb-6">
                 <h2 className="text-3xl font-semibold text-white">
-                  Time's up, Scroll Down
+                  Time we spent together so far
                 </h2>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div className="text-center">
                   <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-                    {timeLeft.days}
+                    {timePassed.months}
+                  </div>
+                  <div className="text-blue-200 text-sm uppercase tracking-wide">
+                    Months
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-6xl font-bold text-white mb-2">
+                    {timePassed.weeks}
+                  </div>
+                  <div className="text-blue-200 text-sm uppercase tracking-wide">
+                    Weeks
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-6xl font-bold text-white mb-2">
+                    {timePassed.days}
                   </div>
                   <div className="text-blue-200 text-sm uppercase tracking-wide">
                     Days
@@ -341,26 +411,10 @@ function App() {
                 </div>
                 <div className="text-center">
                   <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-                    {timeLeft.hours}
+                    {timePassed.hours}
                   </div>
                   <div className="text-blue-200 text-sm uppercase tracking-wide">
                     Hours
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-                    {timeLeft.minutes}
-                  </div>
-                  <div className="text-blue-200 text-sm uppercase tracking-wide">
-                    Minutes
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl md:text-6xl font-bold text-white mb-2">
-                    {timeLeft.seconds}
-                  </div>
-                  <div className="text-blue-200 text-sm uppercase tracking-wide">
-                    Seconds
                   </div>
                 </div>
               </div>
@@ -630,7 +684,7 @@ function App() {
             </div>
           </div>
 
-          {/* Countdown Timer */}
+          {/* Original Countdown Timer */}
           <div className="bg-white/20 backdrop-blur-md rounded-3xl p-8 shadow-2xl animate-fade-in delay-700">
             <div className="text-center mb-6">
               <h2 className="text-3xl font-semibold text-white">Reveal in</h2>
