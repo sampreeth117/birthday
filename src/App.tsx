@@ -59,7 +59,7 @@ function App() {
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
   const particleIdRef = useRef(0);
 
-  const targetDate = new Date("2025-09-12T12:00:00+05:30").getTime();
+  const targetDate = new Date("2025-08-12T12:00:00+05:30").getTime();
   const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
@@ -650,6 +650,28 @@ function App() {
 
           <MemoryQuiz />
 
+          {/* New Section: Future Predictions/Wishes */}
+          <section className="py-20 px-6">
+            <div className="max-w-4xl mx-auto text-center">
+              <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
+                What I hope we'll do together this year
+              </h3>
+              <ul className="list-disc list-inside text-xl text-blue-100 max-w-xl mx-auto space-y-4">
+                <li>
+                  Support each other's dreams and celebrate every success 🏆
+                </li>
+                <li>Have more cozy movie nights and ice cream dates 🎬</li>
+                <li>Learn new things and grow together every day 🤝</li>
+                <li>Travel to new and beautiful places together 🌍</li>
+
+                <li>Make each other laugh every single day 😂</li>
+
+                <li>Create unforgettable memories at trips ✨</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Special Message Section */}
           <section className="py-20 px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
@@ -893,6 +915,21 @@ function App() {
         }
         .animate-float {
           animation: float 6s ease-in-out infinite;
+        }
+        .delay-300 {
+          animation-delay: 0.3s;
+        }
+        .delay-500 {
+          animation-delay: 0.5s;
+        }
+        .delay-700 {
+          animation-delay: 0.7s;
+        }
+        .delay-1000 {
+          animation-delay: 1s;
+        }
+        .delay-2000 {
+          animation-delay: 2s;
         }
       `}</style>
     </div>
