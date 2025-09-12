@@ -59,8 +59,9 @@ function App() {
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
   const particleIdRef = useRef(0);
 
-  const targetDate = new Date("2025-09-12T15:00:00+05:30").getTime();
+  const targetDate = new Date("2025-09-12T18:00:00+05:30").getTime();
   const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
+  const [isTextModalOpen, setIsTextModalOpen] = useState(false);
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
 
@@ -561,7 +562,7 @@ function App() {
             </div>
           </section>
 
-          <section className="w-full max-w-4xl mb-12 mx-auto px-4">
+          {/* <section className="w-full max-w-4xl mb-12 mx-auto px-4">
             <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
               <h3 className="text-2xl font-semibold text-white mb-4 text-center">
                 Here's a small video from me 😁
@@ -578,7 +579,112 @@ function App() {
                 </video>
               </div>
             </div>
+          </section> */}
+
+          {/* New paragraph that opens modal */}
+          <section className="w-full max-w-4xl mb-12 mx-auto px-4">
+            <div
+              className="text-center text-xl text-white underline cursor-pointer select-none"
+              onClick={() => setIsTextModalOpen(true)}
+            >
+              Click here to read a special message from me😊
+            </div>
           </section>
+
+          {/* Modal for text display */}
+          {isTextModalOpen && (
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
+              <div className="bg-white rounded-3xl p-8 max-w-xl max-h-[80vh] overflow-y-auto shadow-2xl relative text-center">
+                <button
+                  onClick={() => setIsTextModalOpen(false)}
+                  className="absolute top-4 right-4 text-gray-700 hover:text-gray-900"
+                >
+                  <X size={28} />
+                </button>
+                <p className="text-gray-900 leading-relaxed">
+                  Hi ammi, first of all happy birthday, I just wanted to say a
+                  few things in this day which I've been meaning to tell from a
+                  long time.
+                  <br />
+                  Yeah here it goes, I LOVE YOU, yes, I'm not proposing you, I'm
+                  not asking you to love me back, I just wanted you to know that
+                  I care, I listen, I observe, I feel, I embrace you.
+                  <br />
+                  You'll never be left alone as long as I'm alive.
+                  <br />
+                  It's just that sometimes I didn't feel my efforts were
+                  acknowledged by you, that made me sad, I hope it changes in
+                  future, if not you loving me back, at least acknowledge my
+                  efforts.
+                  <br />
+                  Enough of about I's, enough about me.
+                  <br />
+                  You're unique, in a way, that anybody will like you if they
+                  get to know.
+                  <br />
+                  You might have a perception that in life people just come and
+                  go, yeah it's true, sad but true, but I want you to know one
+                  thing, I never thought I would fight for someone so hard like
+                  I did for you, I never imagined I would be like this, maybe
+                  some part of me was in need of your warmth, but even with all
+                  of the struggles we both went through, the amount of pain I
+                  endured yet I stayed, I want you to know that people will
+                  stay, no matter how hard things get.
+                  <br />
+                  Yeah, thanks for letting me express myself, I know I'm little
+                  too much for you, we both are totally different, I agree on
+                  that.
+                  <br />
+                  You know, at first, when we both got close after we met in
+                  office, I never saw you as a woman, I just saw you as a girl
+                  who needed love, you were so drained, lost all hopes on humans
+                  and wanted that person only, even though it ended like ages
+                  ago, even though he didn't treat you like you deserved, even
+                  though you put him over you.
+                  <br />
+                  You know what I felt? I just wanted you to feel happy, feel
+                  embraced, feel warm, feel cared.
+                  <br />
+                  At first I wanted you to know that life is much more than a
+                  single person, but you know what happened, boom, even I was in
+                  search of love and you clicked. I fell for you. I never
+                  thought I would see you that way.
+                  <br />
+                  Like you said, I want love but you prioritize career and
+                  family over love.
+                  <br />
+                  Listen to me, at the end of the day, deep down everyone wants
+                  love, I know that I want love, I might not be getting it from
+                  the people I love, but I have never failed in giving love.
+                  <br />
+                  Yeahhhhh, I realised that recently I've been obsessed with you
+                  and it was not healthy, not at all, but yeah from here on, I
+                  will express my love subtly, I will be soft, maybe.. could you
+                  please be soft on me too.
+                  <br />
+                  Uff, I'm talking a lot about myself here na. Sorry sorry,
+                  <br />
+                  I don't know how life will be next year, I want to go to
+                  places with you, eat a lot of things with you, watch a lot of
+                  movies with you, play with you, learn with you, grow with you.
+                  <br />
+                  I just want to spend time as much as possible with you, maybe
+                  this year or your whole life.
+                  <br />
+                  That is with your permission madam.
+                  <br />
+                  Once again, I've let you go, we could spend time with each
+                  other, if not the whole life, at least how much ever we can,
+                  no compulsion.
+                  <br />
+                  Anyway, Love you ammiiiiii.
+                  <br />
+                  Happy Birthday and have a great year ahead 🤍
+                </p>
+                <p className="text-gray-900 leading-relaxed"></p>
+              </div>
+            </div>
+          )}
 
           <section className="py-20 px-6">
             <div className="max-w-6xl mx-auto">
