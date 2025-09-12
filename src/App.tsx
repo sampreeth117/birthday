@@ -59,7 +59,7 @@ function App() {
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
   const particleIdRef = useRef(0);
 
-  const targetDate = new Date("2025-09-12T12:00:00+05:30").getTime();
+  const targetDate = new Date("2025-09-12T15:00:00+05:30").getTime();
   const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
 
   const photos = Array.from({ length: 72 }, (_, i) => `/photos/${i + 1}.jpg`);
