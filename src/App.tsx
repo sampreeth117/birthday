@@ -59,7 +59,7 @@ function App() {
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
   const particleIdRef = useRef(0);
 
-  const targetDate = new Date("2025-09-15T08:30:00+05:30").getTime();
+  const targetDate = new Date("2025-09-14T08:30:00+05:30").getTime();
   const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
   const [isTextModalOpen, setIsTextModalOpen] = useState(false);
 
@@ -582,17 +582,17 @@ function App() {
           </section> */}
 
           {/* New paragraph that opens modal */}
-          <section className="w-full max-w-4xl mb-12 mx-auto px-4">
+          {/*<section className="w-full max-w-4xl mb-12 mx-auto px-4">
             <div
               className="text-center text-xl text-white underline cursor-pointer select-none"
               onClick={() => setIsTextModalOpen(true)}
             >
               Click here to read a special message from me😊
             </div>
-          </section>
+          </section>*/}
 
           {/* Modal for text display */}
-          {isTextModalOpen && (
+          {/*{isTextModalOpen && (
             <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-50">
               <div className="bg-white rounded-3xl p-8 max-w-xl max-h-[80vh] overflow-y-auto shadow-2xl relative text-center">
                 <button
@@ -684,7 +684,7 @@ function App() {
                 <p className="text-gray-900 leading-relaxed"></p>
               </div>
             </div>
-          )}
+          )}*/}
 
           <section className="py-20 px-6">
             <div className="max-w-6xl mx-auto">
