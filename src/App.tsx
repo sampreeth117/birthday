@@ -59,7 +59,7 @@ function App() {
   const celebrationAudioRef = useRef<HTMLAudioElement>(null);
   const particleIdRef = useRef(0);
 
-  const targetDate = new Date("2025-09-13T11:00:00+05:30").getTime();
+  const targetDate = new Date("2025-09-15T08:30:00+05:30").getTime();
   const startDate = new Date("2024-10-10T00:00:00+05:30").getTime();
   const [isTextModalOpen, setIsTextModalOpen] = useState(false);
 
